@@ -1,25 +1,26 @@
+import { useEffect, useState } from "react";
 import { Corusel } from "./corusel";
 import { Product } from "./product-cart";
+import { IProduct } from "../types";
+import { api } from "../api/axios";
+import { urls } from "../api/urls";
 
-const test = [
-  {
-    img: [
-      "https://www.asrock.com.tw/Graphics-Card/photo/Radeon%20RX%205700%20XT%20Challenger%20D%208G%20OC(M1).png",
-      "https://www.asrock.com.tw/Graphics-Card/photo/Radeon%20RX%205700%20XT%20Challenger%20D%208G%20OC(M2).png",
-      "https://www.asrock.com.tw/Graphics-Card/photo/Radeon%20RX%205700%20XT%20Challenger%20D%208G%20OC(M5).png",
-      "https://www.asrock.com.tw/Graphics-Card/photo/Radeon%20RX%205700%20XT%20Challenger%20D%208G%20OC(M6).png",
-    ],
-    title: "AMD Radeon™ RX 5700 XT Challenger D 8G OC",
-    desc: "Частота загрузки: Вплоть до 1905 MHz / 14 Gbps Game Clock: Вплоть до 1795 MHz / 14 Gbps Базовая частота: 1580 - 1650 MHz / 14 Gbps",
-    price: "12000",
-  },
-];
 export function Main() {
+  const [data, setData] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    api(urls.product.get)
+      .then((res) => setData(res.data))
+      .catch((e) => console.log(e));
+  }, []);
+
+  if (!data) return <p>loading ...</p>;
+
   return (
     <div>
       <Corusel />
-      <div className="grid grid-cols-5 mt-10">
-        {test.map((el, index) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-10 gap-5 px-5">
+        {data.map((el, index) => (
           <Product
             key={index}
             img={el.img}

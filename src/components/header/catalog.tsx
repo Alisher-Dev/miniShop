@@ -13,7 +13,7 @@ export function Catalog() {
       <DropdownMenuTrigger>
         <Button>
           <Logs size={40} />
-          Catalog
+          <p className="hidden sm:block">Catalog</p>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[600px] grid grid-cols-5">
