@@ -1,6 +1,6 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { IProduct } from "../types";
+import { IParamsProduct } from "../types";
 import {
   Carousel,
   CarouselApi,
@@ -14,13 +14,11 @@ import { useStore } from "../helpers/store";
 import { AddStorage } from "../helpers/storage";
 
 export function DialogProduct({
-  desc,
-  img,
-  price,
-  title,
+  product,
   isOpen,
   setOpen,
-}: IProduct & {
+}: {
+  product: IParamsProduct;
   isOpen?: boolean;
   setOpen?: Dispatch<SetStateAction<boolean>>;
 }) {
@@ -31,8 +29,8 @@ export function DialogProduct({
   const add = useStore((state) => state.addCart);
 
   const addCarts = () => {
-    add({ desc, img, price, title });
-    AddStorage("cart", JSON.stringify([...cart, { desc, img, price, title }]));
+    add(product);
+    AddStorage("cart", JSON.stringify([...cart, product]));
   };
 
   useEffect(() => {
@@ -51,7 +49,7 @@ export function DialogProduct({
       <DialogContent>
         <Carousel setApi={setApi} className="hover:bg-gray-100 rounded-md">
           <CarouselContent className="w-full m-0 h-[400px] relative">
-            {img.map((el, index) => (
+            {product?.img.map((el, index) => (
               <CarouselItem
                 key={index}
                 className="flex items-center justify-between p-5 hover:scale-110 transition-all"
@@ -69,14 +67,14 @@ export function DialogProduct({
           </div>
         </Carousel>
         <div className="grid gap-2">
-          <p className="text-sm md:text-lg font-bold">{title}</p>
-          <p className="text-xs md:text-sm">{desc}</p>
+          <p className="text-sm md:text-lg font-bold">{product?.title}</p>
+          <p className="text-xs md:text-sm">{product?.desc}</p>
           <div className="flex items-center justify-between mt-3">
             <p className="text-sm md:text-base font-semibold">
-              {FormatPrice(price)}
+              {FormatPrice(product?.price)}
             </p>
             <span className="space-x-2 flex items-center">
-              {cart.map((el) => el.desc).includes(desc) ? (
+              {cart.map((el) => el.desc).includes(product?.desc) ? (
                 <Button>
                   <Check />
                 </Button>

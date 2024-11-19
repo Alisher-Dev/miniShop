@@ -5,6 +5,8 @@ import { Main } from "./components/main/main";
 import { Footer } from "./components/footer/footer";
 import { Cart } from "./components/cart/cart";
 import { Toaster } from "./components/ui/toaster";
+import { Guard } from "./components/admin/guard";
+import { Admin } from "./components/admin/admin";
 
 function App() {
   return (
@@ -14,7 +16,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/" element={null} />
+          <Route path="/admin" element={<Guard />} />
+          <Route path="/admin/dash" element={<Admin />} />
         </Routes>
         <Toaster />
       </div>

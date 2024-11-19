@@ -21,13 +21,7 @@ export function Main() {
       <Corusel />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-10 gap-5 px-5">
         {data.map((el, index) => (
-          <Product
-            key={index}
-            img={el.img}
-            desc={el.desc}
-            title={el.title}
-            price={el.price}
-          />
+          <Product key={index} product={el} />
         ))}
       </div>
     </div>

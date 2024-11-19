@@ -6,7 +6,7 @@ const telegramUrl = import.meta.env.VITE_BASE_TELEGRAM;
 export async function api(
   url?: string,
   data?: any,
-  method?: "GET" | "POST",
+  method?: "GET" | "POST" | "DELETE",
   base_url?: "api" | "telegram"
 ) {
   return await axios({

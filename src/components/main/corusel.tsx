@@ -60,14 +60,7 @@ export function Corusel() {
           ))}
         </CarouselContent>
       </Carousel>
-      <DialogProduct
-        desc={product?.desc || ""}
-        img={product?.img || []}
-        title={product?.title || ""}
-        price={product?.price || "0"}
-        isOpen={open}
-        setOpen={setOpen}
-      />
+      <DialogProduct product={product!} isOpen={open} setOpen={setOpen} />
     </>
   );
 }
